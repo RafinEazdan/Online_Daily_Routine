@@ -1,0 +1,297 @@
+[
+    {
+      "id": 1,
+      "day": "Saturday",
+      "activity": "Academics",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 2,
+      "day": "Saturday",
+      "activity": "Data Science",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 3,
+      "day": "Saturday",
+      "activity": "Machine Learning",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 4,
+      "day": "Saturday",
+      "activity": "React and Next.js",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 5,
+      "day": "Saturday",
+      "activity": "Personal Web Dev Project",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 6,
+      "day": "Saturday",
+      "activity": "Research Work",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 7,
+      "day": "Sunday",
+      "activity": "Academics",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 8,
+      "day": "Sunday",
+      "activity": "Data Science",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 9,
+      "day": "Sunday",
+      "activity": "Machine Learning",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 10,
+      "day": "Sunday",
+      "activity": "React and Next.js",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 11,
+      "day": "Sunday",
+      "activity": "Personal Web Dev Project",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 12,
+      "day": "Sunday",
+      "activity": "Research Work",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 13,
+      "day": "Monday",
+      "activity": "Academics",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 14,
+      "day": "Monday",
+      "activity": "Data Science",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 15,
+      "day": "Monday",
+      "activity": "Machine Learning",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 16,
+      "day": "Monday",
+      "activity": "React and Next.js",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 17,
+      "day": "Monday",
+      "activity": "Personal Web Dev Project",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 18,
+      "day": "Monday",
+      "activity": "Research Work",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 19,
+      "day": "Tuesday",
+      "activity": "Academics",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 20,
+      "day": "Tuesday",
+      "activity": "Data Science",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 21,
+      "day": "Tuesday",
+      "activity": "Machine Learning",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 22,
+      "day": "Tuesday",
+      "activity": "React and Next.js",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 23,
+      "day": "Tuesday",
+      "activity": "Personal Web Dev Project",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 24,
+      "day": "Tuesday",
+      "activity": "Research Work",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 25,
+      "day": "Wednesday",
+      "activity": "Academics",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 26,
+      "day": "Wednesday",
+      "activity": "Data Science",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 27,
+      "day": "Wednesday",
+      "activity": "Machine Learning",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 28,
+      "day": "Wednesday",
+      "activity": "React and Next.js",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 29,
+      "day": "Wednesday",
+      "activity": "Personal Web Dev Project",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 30,
+      "day": "Wednesday",
+      "activity": "Research Work",
+      "hours": 2,
+      "status": false
+    },
+    {
+      "id": 31,
+      "day": "Thursday",
+      "activity": "Academics",
+      "hours": 0.5,
+      "status": false
+    },
+    {
+      "id": 32,
+      "day": "Thursday",
+      "activity": "Data Science",
+      "hours": 0.5,
+      "status": false
+    },
+    {
+      "id": 33,
+      "day": "Thursday",
+      "activity": "Machine Learning",
+      "hours": 0.5,
+      "status": false
+    },
+    {
+      "id": 34,
+      "day": "Thursday",
+      "activity": "React and Next.js",
+      "hours": 0.5,
+      "status": false
+    },
+    {
+      "id": 35,
+      "day": "Thursday",
+      "activity": "Personal Web Dev Project",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 36,
+      "day": "Thursday",
+      "activity": "Research Work",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 37,
+      "day": "Friday",
+      "activity": "Academics",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 38,
+      "day": "Friday",
+      "activity": "Data Science",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 39,
+      "day": "Friday",
+      "activity": "Machine Learning",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 40,
+      "day": "Friday",
+      "activity": "React and Next.js",
+      "hours": 1,
+      "status": false
+    },
+    {
+      "id": 41,
+      "day": "Friday",
+      "activity": "Personal Web Dev Project",
+      "hours": 1.5,
+      "status": false
+    },
+    {
+      "id": 42,
+      "day": "Friday",
+      "activity": "Research Work",
+      "hours": 1.5,
+      "status": false
+    }
+  ]
+  

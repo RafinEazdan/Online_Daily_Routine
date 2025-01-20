@@ -3,23 +3,36 @@ import React, { useState, useEffect } from "react";
 const ScheduleTable = ({ schedule, currentDay }) => {
   const [data, setData] = useState([]);
 
-  // Load saved schedule for the current day from localStorage on component mount or day change
-  useEffect(() => {
-    const savedSchedule = localStorage.getItem(`schedule-${currentDay}`);
-    if (savedSchedule) {
-      setData(JSON.parse(savedSchedule));
-    } else {
-      setData(schedule); // If no saved schedule, use the default
-    }
-  }, [currentDay, schedule]);
-
-  // Save the current day's schedule to localStorage
-  const handleSave = () => {
-    localStorage.setItem(`schedule-${currentDay}`, JSON.stringify(data));
-    alert(`Schedule for ${currentDay} saved successfully!`);
+  // Fetch the global JSON file
+  const fetchGlobalSchedule = async () => {
+    const response = await fetch("https://raw.githubusercontent.com/<your-username>/<repo-name>/main/globalStatus.json");
+    const globalData = await response.json();
+    const filteredData = globalData.filter((item) => item.day === currentDay);
+    setData(filteredData);
   };
 
-  // Handle checkbox toggle
+  // Save updated schedule back to GitHub
+  const saveGlobalSchedule = async () => {
+    const updatedSchedule = schedule.map((item) => {
+      const matched = data.find((d) => d.id === item.id);
+      return matched || item;
+    });
+
+    const response = await fetch("/api/save-schedule", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedSchedule),
+    });
+
+    if (response.ok) {
+      alert("Schedule saved globally!");
+    }
+  };
+
+  useEffect(() => {
+    fetchGlobalSchedule();
+  }, [currentDay]);
+
   const handleStatusChange = (id) => {
     setData((prevData) =>
       prevData.map((item) =>
@@ -57,7 +70,7 @@ const ScheduleTable = ({ schedule, currentDay }) => {
           ))}
         </tbody>
       </table>
-      <button onClick={handleSave} style={{ marginTop: "20px" }}>
+      <button onClick={saveGlobalSchedule} style={{ marginTop: "20px" }}>
         Save Schedule
       </button>
     </div>
