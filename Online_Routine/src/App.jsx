@@ -18,7 +18,7 @@ const App = () => {
       "Friday",
       "Saturday",
     ];
-    const today = 6; //new Date().getDay(); // Returns 0-6 (Sunday = 0)
+    const today = new Date().getDay(); // Returns 0-6 (Sunday = 0)
     return days[today];
   };
 
