@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 const ScheduleTable = ({ schedule, currentDay }) => {
   const [data, setData] = useState([]);
   const [totalHours, setTotalHours] = useState(8);
+  const bellSound = new Audio("/bell.mp3"); // Reference to the bell sound
 
   // Load saved schedule and totalHours for the current day
   useEffect(() => {
@@ -95,9 +96,10 @@ const ScheduleTable = ({ schedule, currentDay }) => {
           if (task.isRunning && task.remainingTime > 0) {
             return {
               ...task,
-              remainingTime: task.remainingTime - 1, // Decrement by 1 minute
+              remainingTime: task.remainingTime - 1, // Decrement by 1 second
             };
           } else if (task.isRunning && task.remainingTime <= 0) {
+            bellSound.play(); // Play the bell sound when the task is completed
             return {
               ...task,
               isRunning: false, // Stop timer if it reaches 0
@@ -109,7 +111,7 @@ const ScheduleTable = ({ schedule, currentDay }) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [bellSound]);
 
   return (
     <div>
