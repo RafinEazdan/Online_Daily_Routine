@@ -120,7 +120,7 @@ const ScheduleTable = ({ schedule, currentDay }) => {
       {/* Input for total hours */}
       <div style={{ marginBottom: "20px" }}>
         <label>
-          Total Hours (x):
+          Total Hours :
           <input
             type="number"
             value={totalHours}
