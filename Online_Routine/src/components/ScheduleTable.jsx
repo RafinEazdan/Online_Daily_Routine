@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const ScheduleTable = ({ schedule, currentDay }) => {
   const [data, setData] = useState([]);
-  const [totalHours, setTotalHours] = useState(0);
+  const [totalHours, setTotalHours] = useState(8);
 
   // Load saved schedule and totalHours for the current day
   useEffect(() => {
@@ -11,13 +11,19 @@ const ScheduleTable = ({ schedule, currentDay }) => {
     if (savedSchedule) {
       setData(JSON.parse(savedSchedule));
     } else {
-      setData(schedule); // Default schedule
+      setData(
+        schedule.map((task) => ({
+          ...task,
+          remainingTime: task.adjustedHours ? task.adjustedHours * 60 : 0, // Initialize remainingTime in minutes
+          isRunning: false, // Timer state
+        }))
+      );
     }
 
     if (savedTotalHours) {
-      setTotalHours(parseFloat(savedTotalHours)); // Default total hours
+      setTotalHours(parseFloat(savedTotalHours));
     } else {
-      setTotalHours(0);
+      setTotalHours(8);
     }
   }, [currentDay, schedule]);
 
@@ -26,7 +32,8 @@ const ScheduleTable = ({ schedule, currentDay }) => {
     setData((prevData) =>
       prevData.map((item) => ({
         ...item,
-        adjustedHours: (totalHours*60 / 8) * item.hours,
+        adjustedHours: (totalHours / 8) * item.hours * 60,
+        remainingTime: (totalHours / 8) * item.hours * 60 * 60, // Adjust remainingTime in minutes
       }))
     );
   }, [totalHours]);
@@ -53,6 +60,57 @@ const ScheduleTable = ({ schedule, currentDay }) => {
     setTotalHours(isNaN(value) ? 0 : value);
   };
 
+  // Timer logic
+  const handleStart = (id) => {
+    setData((prevData) =>
+      prevData.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              isRunning: true,
+            }
+          : task
+      )
+    );
+  };
+
+  const handlePause = (id) => {
+    setData((prevData) =>
+      prevData.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              isRunning: false,
+            }
+          : task
+      )
+    );
+  };
+
+  // Countdown logic (runs every second for active timers)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setData((prevData) =>
+        prevData.map((task) => {
+          if (task.isRunning && task.remainingTime > 0) {
+            return {
+              ...task,
+              remainingTime: task.remainingTime - 1, // Decrement by 1 minute
+            };
+          } else if (task.isRunning && task.remainingTime <= 0) {
+            return {
+              ...task,
+              isRunning: false, // Stop timer if it reaches 0
+            };
+          }
+          return task;
+        })
+      );
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       <h2>Schedule for {currentDay}</h2>
@@ -75,27 +133,55 @@ const ScheduleTable = ({ schedule, currentDay }) => {
           <tr>
             <th>Day</th>
             <th>Activity</th>
-            <th>Time Allocation (Hours)</th>
-            <th>Adjusted Hours (Minutes)</th>
+            <th>Time Allocation (hr)</th>
+            <th>Adjusted Hours (min)</th>
+            <th>Remaining Time (mm:ss)</th>
             <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {data.map(({ id, day, activity, hours, adjustedHours, status }) => (
-            <tr key={id}>
-              <td>{day}</td>
-              <td>{activity}</td>
-              <td>{hours}</td>
-              <td>{adjustedHours?.toFixed(2) || 0}</td>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={status}
-                  onChange={() => handleStatusChange(id)}
-                />
-              </td>
-            </tr>
-          ))}
+          {data.map(
+            ({
+              id,
+              day,
+              activity,
+              hours,
+              adjustedHours,
+              remainingTime,
+              status,
+              isRunning,
+            }) => (
+              <tr key={id}>
+                <td>{day}</td>
+                <td>{activity}</td>
+                <td>{hours}</td>
+                <td>{adjustedHours?.toFixed(2) || 0}</td>
+                <td>
+                  {Math.floor(remainingTime / 60)
+                    .toString()
+                    .padStart(2, "0")}
+                  :{(remainingTime % 60).toString().padStart(2, "0")}
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={status}
+                    onChange={() => handleStatusChange(id)}
+                  />
+                </td>
+                <td>
+                  {!isRunning && remainingTime > 0 ? (
+                    <button onClick={() => handleStart(id)}>Start</button>
+                  ) : isRunning ? (
+                    <button onClick={() => handlePause(id)}>Pause</button>
+                  ) : (
+                    <button disabled>Completed</button>
+                  )}
+                </td>
+              </tr>
+            )
+          )}
         </tbody>
       </table>
       <button onClick={handleSave} style={{ marginTop: "20px" }}>
